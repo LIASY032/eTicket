@@ -2,6 +2,7 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+
     "iisExpress": {
       "applicationUrl": "http://localhost:37755",
       "sslPort": 44356
@@ -11,6 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "Movies",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
