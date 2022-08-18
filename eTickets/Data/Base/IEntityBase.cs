@@ -1,6 +1,12 @@
-﻿namespace eTickets.Data.Base
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace eTickets.Data.Base
 {
-    public class IEntityBase
+    public interface IEntityBase
     {
+        int Id { get; set; }
     }
 }
