@@ -40,7 +40,7 @@ namespace eTickets
 
 
             services.AddScoped<IProducersService, ProducersService>();
-
+            services.AddScoped<ICinemasService, CinemasService>();
 
 
             services.AddControllersWithViews();
