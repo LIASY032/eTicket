@@ -1,5 +1,6 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Base;
+using eTickets.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,8 @@ namespace eTickets.Models
 {
     public class NewMovieVM
     {
+
+        public int Id { get; set; }
         [Display(Name = "Movie name")]
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
@@ -35,9 +38,9 @@ namespace eTickets.Models
         [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
 
-        // [Display(Name = "Select a category")]
-        // [Required(ErrorMessage = "Movie category is required")]
-        // public MovieCategory MovieCategory { get; set; }
+        [Display(Name = "Select a category")]
+        [Required(ErrorMessage = "Movie category is required")]
+        public MovieCategory MovieCategory { get; set; }
 
         //Relationships
         [Display(Name = "Select actor(s)")]
