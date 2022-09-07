@@ -2,7 +2,7 @@
 
 namespace eTickets.Models
 {
-    public class Actor_Movie : IEntityBase
+    public class Actor_Movie
     {
 
 
@@ -13,6 +13,5 @@ namespace eTickets.Models
         public Movie Movie { get; set; }
 
         public Actor Actor{ get; set; }
-        public int Id { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }
