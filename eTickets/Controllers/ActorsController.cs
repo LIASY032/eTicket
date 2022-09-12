@@ -1,6 +1,8 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Services;
+using eTickets.Data.Static;
 using eTickets.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace eTickets.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
@@ -18,12 +21,12 @@ namespace eTickets.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
             return View(data);
         }
-
 
         //Get: Actors/Create
         public IActionResult Create()
@@ -42,8 +45,8 @@ namespace eTickets.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         //Get: Actors/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);
@@ -51,7 +54,6 @@ namespace eTickets.Controllers
             if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
         }
-
 
         //Get: Actors/Edit/1
         public async Task<IActionResult> Edit(int id)

@@ -2,6 +2,7 @@
 using eTickets.Data.Static;
 using eTickets.Data.ViewModels;
 using eTickets.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -105,6 +106,12 @@ RequestId = "Cannot register "
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Movies");
         }
+
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
+        }
+
 
     }
 }
