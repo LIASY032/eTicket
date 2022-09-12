@@ -4,6 +4,10 @@ using eTickets.Data.ViewModels;
 using eTickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eTickets.Controllers
@@ -21,13 +25,15 @@ namespace eTickets.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+
+        public async Task<IActionResult> Users()
         {
-            return View();
+            var users = await _context.Users.ToListAsync();
+            return View(users);
         }
 
-        public IActionResult Login() => View(new LoginVM());
 
+        public IActionResult Login() => View(new LoginVM());
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
@@ -54,6 +60,7 @@ namespace eTickets.Controllers
             return View(loginVM);
         }
 
+
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
@@ -73,13 +80,23 @@ namespace eTickets.Controllers
                 FullName = registerVM.FullName,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress
+              
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
             if (newUserResponse.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
             return View("RegisterCompleted");
+            }
+
+
+            var errorMessage = new ErrorViewModel()
+            {
+RequestId = "Cannot register " 
+            };
+            return View("Error", errorMessage);
         }
 
         [HttpPost]
